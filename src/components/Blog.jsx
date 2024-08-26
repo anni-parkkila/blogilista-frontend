@@ -12,8 +12,14 @@ const Blog = ({ blog, updateLikes, removeBlog }) => {
     maxWidth: 500
   }
 
-  const hideWhenVisible = { display: blogVisible ? 'none' : '' }
-  const showWhenVisible = { display: blogVisible ? '' : 'none' }
+  const addLike = (event) => {
+    event.preventDefault()
+    updateLikes({
+      ...blog,
+      likes: blog.likes + 1,
+      user: blog.user.id
+    })
+  }
 
   const toggleVisibility = () => {
     setBlogVisible(!blogVisible)
@@ -21,16 +27,20 @@ const Blog = ({ blog, updateLikes, removeBlog }) => {
 
   return (
     <div style={blogStyle}>
-      <div style={hideWhenVisible}>
-        <strong>{blog.title}</strong> by {blog.author} <button onClick={toggleVisibility}>view</button>
-      </div>
-      <div style={showWhenVisible}>
-        <strong>{blog.title}</strong> by {blog.author} <button onClick={toggleVisibility}>hide</button><br />
-      Url: {blog.url}<br />
-      Likes: {blog.likes} <button className='likeButton' onClick={updateLikes}>like</button><br />
-      Added by: {blog.user.name}<br />
-        <button className='removeButton' onClick={removeBlog}>delete</button>
-      </div>
+      {!blogVisible && (
+        <div>
+          <strong>{blog.title}</strong> by {blog.author} <button onClick={toggleVisibility}>view</button>
+        </div>
+      )}
+      {blogVisible && (
+        <div>
+          <strong>{blog.title}</strong> by {blog.author} <button onClick={toggleVisibility}>hide</button><br />
+          Url: {blog.url}<br />
+          Likes: {blog.likes} <button className='likeButton' onClick={addLike}>like</button><br />
+          Added by: {blog.user.name}<br />
+          <button className='removeButton' onClick={removeBlog}>delete</button>
+        </div>
+      )}
     </div>
   )
 }
