@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event'
 import Blog from './Blog'
 
 describe('<Blog /> component', () => {
+  let updateLikes
   beforeEach(() => {
     const blog = {
       title: 'Adventures of Sherlock Holmes',
@@ -14,7 +15,8 @@ describe('<Blog /> component', () => {
         name: 'SuperUser'
       }
     }
-    render(<Blog blog={blog} />)
+    updateLikes = vi.fn()
+    render(<Blog blog={blog} updateLikes={updateLikes} />)
   })
 
   test('renders content', () => {
@@ -43,5 +45,19 @@ describe('<Blog /> component', () => {
 
     const name = screen.getByText('SuperUser', { exact: false })
     expect(name).toBeDefined()
+  })
+
+  test('update likes twice', async () => {
+    const user = userEvent.setup()
+    const viewButton = screen.getByText('view')
+    await user.click(viewButton)
+
+    const likeButton = screen.getByText('like')
+    await user.click(likeButton)
+    await user.click(likeButton)
+
+    const likes = screen.getByText('Likes:', { exact: false })
+    expect(likes).toBeDefined()
+    expect(updateLikes.mock.calls).toHaveLength(2)
   })
 })

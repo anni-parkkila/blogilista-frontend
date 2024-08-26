@@ -68,17 +68,11 @@ const App = () => {
     }, 5000)
   }
 
-  const updateLikes = (blog) => {
-    const updatedBlog = {
-      ...blog,
-      likes: blog.likes + 1,
-      user: blog.user.id
-    }
-
+  const addLike = (blogObject) => {
     blogService
-      .update(blog.id, updatedBlog)
+      .update(blogObject.id, blogObject)
       .then(returnedBlog => {
-        setBlogs(blogs.map(blog => blog.id !== updatedBlog.id ? blog : returnedBlog))
+        setBlogs(blogs.map(blog => blog.id !== blogObject.id ? blog : returnedBlog))
       })
   }
 
@@ -167,7 +161,7 @@ const App = () => {
       </Togglable>
       <div className='bloglist'>
         {blogs.sort((a, b) => b.likes - a.likes).map(blog =>
-          <Blog key={blog.id} blog={blog} updateLikes={() => updateLikes(blog)} removeBlog={() => removeBlog(blog.id)}/>
+          <Blog key={blog.id} blog={blog} updateLikes={addLike} removeBlog={() => removeBlog(blog.id)}/>
         )}
       </div>
     </div>
