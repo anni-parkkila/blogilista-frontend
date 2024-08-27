@@ -1,8 +1,7 @@
-# React + Vite
+# blogilista-frontend
+[Full Stack Open](https://fullstackopen.com/) -kurssin tehtäviä:
+* [Osa 5](https://fullstackopen.com/osa5): blogilistan frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Sovelluksen muut osat:
+- [Backend](https://github.com/anni-parkkila/blogilista-backend)
+- [E2E-testit](https://github.com/anni-parkkila/blogilista-e2e)
