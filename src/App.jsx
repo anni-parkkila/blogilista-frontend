@@ -3,6 +3,7 @@ import Blog from './components/Blog'
 import BlogForm from './components/BlogForm'
 import LoginForm from './components/LoginForm'
 import Togglable from './components/Togglable'
+import Notification from './components/Notification'
 import blogService from './services/blogs'
 import loginService from './services/login'
 import './index.css'
@@ -113,28 +114,10 @@ const App = () => {
     setUser(null)
   }
 
-  const Notification = ({ message }) => {
-    if (message === null) {
-      return null
-    }
-    if (message.includes('ERROR')) {
-      return (
-        <div className='error'>
-          {message}
-        </div>
-      )
-    } else {
-      return (
-        <div className='success'>
-          {message}
-        </div>
-      )
-    }
-  }
-
   if (user === null) {
     return (
       <div>
+        <h1>Bloglist</h1>
         <h2>Log in to application</h2>
         <Notification message={notification} />
         <LoginForm
@@ -161,7 +144,7 @@ const App = () => {
       </Togglable>
       <div className='bloglist'>
         {blogs.sort((a, b) => b.likes - a.likes).map(blog =>
-          <Blog key={blog.id} blog={blog} updateLikes={addLike} removeBlog={() => removeBlog(blog.id)}/>
+          <Blog key={blog.id} blog={blog} updateLikes={addLike} removeBlog={() => removeBlog(blog.id)} user={user}/>
         )}
       </div>
     </div>
