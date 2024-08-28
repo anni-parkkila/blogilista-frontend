@@ -15,8 +15,12 @@ describe('<Blog /> component', () => {
         name: 'SuperUser'
       }
     }
+    const user = {
+      username: 'root',
+      name: 'SuperUser'
+    }
     updateLikes = vi.fn()
-    render(<Blog blog={blog} updateLikes={updateLikes} />)
+    render(<Blog blog={blog} updateLikes={updateLikes} user={user}/>)
   })
 
   test('renders content', () => {
